@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Змейка: The World Edition</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="world-circle"></div>
+  <div id="start-screen">
+    <h1>🐍 Змейка: The World</h1>
+    <label for="difficulty">Сложность:</label>
+    <select id="difficulty">
+      <option value="easy">Лёгкая</option>
+      <option value="medium">Средняя</option>
+      <option value="hard">Сложная</option>
+      <option value="superhard">Суперсложная</option>
+    </select>
+    <br><br>
+    <button id="start-btn">Старт</button>
+    <p id="high-score">Рекорд: 0</p>
+  </div>
+  <div id="game-container" class="hidden">
+    <div id="score">Счёт: 0</div>
+    <div id="timer">Время: 0 сек</div>
+    <div id="game-board" style="grid-template-columns: repeat(20, 1fr);"></div>
+    <!-- Виртуальные кнопки -->
+    <div id="up" class="control-button">↑</div>
+    <div id="left" class="control-button">←</div>
+    <div id="right" class="control-button">→</div>
+    <div id="down" class="control-button">↓</div>
+  </div>
+  <script src="d.js"></script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+body {
+  font-family: 'Orbitron', sans-serif;
+  background: radial-gradient(ellipse at center, #000 0%, #111 100%);
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  touch-action: manipulation;
+}
+
+#game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  position: relative;
+}
+
+#game-board {
+  display: grid;
+  gap: 2px;
+  margin: 20px auto;
+  background-color: #0a0a0a;
+  box-shadow: 0 0 30px #00f2ff33;
+  border: 2px solid #00f2ff99;
+  padding: 5px;
+}
+
+.cell {
+  width: 22px;
+  height: 22px;
+  background-color: #1a1a1a;
+  transition: background-color 0.2s;
+  box-shadow: inset 0 0 2px #000;
+}
+
+.snake {
+  background: #00ff73;
+  box-shadow: 0 0 10px #00ff73, inset 0 0 5px #00ff73;
+}
+
+.snake-frozen {
+  background: #808080;
+  box-shadow: 0 0 5px #808080, inset 0 0 3px #808080;
+  animation: freezePulse 0.5s infinite;
+}
+
+@keyframes freezePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.apple {
+  background: red;
+  box-shadow: 0 0 8px red;
+}
+
+.blue-apple {
+  background: #00bfff;
+  box-shadow: 0 0 10px #00bfff, inset 0 0 3px #00f;
+}
+
+.rainbow-apple {
+  background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+  animation: rainbowSpin 1s linear infinite;
+  border: 2px solid #fff;
+  box-shadow: 0 0 15px white;
+}
+
+@keyframes rainbowSpin {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+.bullet {
+  background: radial-gradient(circle, #ff5555 0%, #aa0000 80%);
+  border-radius: 50%;
+  box-shadow: 0 0 20px #ff5555, 0 0 30px #aa0000;
+  animation: bulletPulse 0.6s infinite;
+}
+
+@keyframes bulletPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; }
+}
+
+body.frozen {
+  filter: grayscale(1) brightness(1.3) contrast(1.2) blur(1px);
+  animation: freezeWobble 0.5s infinite;
+}
+
+@keyframes freezeWobble {
+  0% { transform: scale(1.01) rotate(0.2deg); }
+  50% { transform: scale(0.99) rotate(-0.2deg); }
+  100% { transform: scale(1.01) rotate(0.2deg); }
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 16px;
+  margin-top: 10px;
+  background: #111;
+  color: #0ff;
+  border: 2px solid #0ff;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 0 10px #0ff;
+}
+
+button:hover {
+  background: #0ff;
+  color: #000;
+  box-shadow: 0 0 15px #0ff, 0 0 25px #0ff;
+}
+
+select {
+  padding: 5px 10px;
+  font-size: 16px;
+  background-color: #111;
+  color: #0ff;
+  border: 1px solid #0ff;
+  box-shadow: 0 0 8px #0ff;
+}
+
+#start-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px;
+}
+
+.hidden {
+  display: none;
+}
+
+h1, h2, h3, #score, #timer, #high-score {
+  text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+}
+
+#world-circle {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 450px;
+  height: 450px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 0, 0, 0.6) 10%, rgba(255, 165, 0, 0.6) 20%, rgba(255, 255, 0, 0.6) 30%, rgba(0, 255, 0, 0.6) 40%, rgba(0, 0, 255, 0.6) 50%, rgba(75, 0, 130, 0.6) 60%, rgba(128, 128, 128, 0.8) 70%, transparent 90%);
+  border: 8px solid rgba(128, 128, 128, 0.9);
+  box-shadow: 0 0 60px rgba(255, 255, 0, 0.9), 0 0 120px rgba(255, 0, 0, 0.7), 0 0 180px rgba(0, 255, 0, 0.5), 0 0 240px rgba(0, 0, 255, 0.3);
+  animation: dioWorldEffect 2s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 9999;
+  display: none;
+}
+
+@keyframes dioWorldEffect {
+  0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.8; filter: brightness(1.5); }
+  50% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; filter: brightness(2.5); }
+  100% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.8; filter: brightness(1.5); }
+}
+
+/* Виртуальные кнопки только для мобильных устройств */
+.control-button {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: rgba(0, 255, 255, 0.7);
+  border: 2px solid #0ff;
+  border-radius: 50%;
+  color: #000;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.control-button:hover {
+  background: rgba(0, 255, 255, 0.9);
+  box-shadow: 0 0 15px #0ff;
+}
+
+#up { top: 20px; left: 50%; transform: translateX(-50%); }
+#left { top: 100px; left: 30%; }
+#right { top: 100px; right: 30%; }
+#down { top: 180px; left: 50%; transform: translateX(-50%); }
+
+@media (min-width: 768px) {
+  .control-button {
+    display: none; /* Скрываем кнопки на десктопе */
+  }
+}
